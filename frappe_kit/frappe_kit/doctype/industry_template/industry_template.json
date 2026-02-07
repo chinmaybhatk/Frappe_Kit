@@ -1,0 +1,109 @@
+{
+  "actions": [],
+  "creation": "2025-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "industry_code",
+    "industry_name",
+    "icon",
+    "description",
+    "enabled",
+    "sample_data_section",
+    "sample_data_file",
+    "chart_of_accounts",
+    "default_currency",
+    "demo_scenarios",
+    "settings_section",
+    "default_settings_json"
+  ],
+  "fields": [
+    {
+      "fieldname": "industry_code",
+      "fieldtype": "Data",
+      "label": "Industry Code",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "industry_name",
+      "fieldtype": "Data",
+      "label": "Industry Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "icon",
+      "fieldtype": "Data",
+      "label": "Icon (Emoji or Class)"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "Description"
+    },
+    {
+      "fieldname": "enabled",
+      "fieldtype": "Check",
+      "label": "Enabled",
+      "default": "1"
+    },
+    {
+      "fieldname": "sample_data_section",
+      "fieldtype": "Section Break",
+      "label": "Sample Data Configuration"
+    },
+    {
+      "fieldname": "sample_data_file",
+      "fieldtype": "Attach",
+      "label": "Sample Data JSON"
+    },
+    {
+      "fieldname": "chart_of_accounts",
+      "fieldtype": "Data",
+      "label": "Chart of Accounts Template"
+    },
+    {
+      "fieldname": "default_currency",
+      "fieldtype": "Link",
+      "label": "Default Currency",
+      "options": "Currency"
+    },
+    {
+      "fieldname": "demo_scenarios",
+      "fieldtype": "Table",
+      "label": "Demo Scenarios",
+      "options": "Industry Demo Scenario"
+    },
+    {
+      "fieldname": "settings_section",
+      "fieldtype": "Section Break",
+      "label": "Default Settings"
+    },
+    {
+      "fieldname": "default_settings_json",
+      "fieldtype": "Code",
+      "label": "Default Settings (JSON)",
+      "options": "JSON"
+    }
+  ],
+  "links": [],
+  "modified": "2025-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Frappe Kit",
+  "name": "Industry Template",
+  "naming_rule": "By fieldname",
+  "autoname": "field:industry_code",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

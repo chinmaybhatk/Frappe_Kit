@@ -1,0 +1,78 @@
+{
+  "items": [
+    {
+      "item_code": "FG-001",
+      "item_name": "Steel Frame Assembly",
+      "item_group": "Finished Goods",
+      "standard_rate": 15000,
+      "stock_uom": "Nos"
+    },
+    {
+      "item_code": "RM-001",
+      "item_name": "Steel Sheet 2mm",
+      "item_group": "Raw Material",
+      "standard_rate": 2500,
+      "stock_uom": "Kg"
+    },
+    {
+      "item_code": "RM-002",
+      "item_name": "Welding Wire",
+      "item_group": "Raw Material",
+      "standard_rate": 800,
+      "stock_uom": "Kg"
+    },
+    {
+      "item_code": "RM-003",
+      "item_name": "Bolts M10",
+      "item_group": "Raw Material",
+      "standard_rate": 5,
+      "stock_uom": "Nos"
+    }
+  ],
+  "customers": [
+    {
+      "customer_name": "Industrial Solutions Ltd",
+      "customer_group": "Commercial",
+      "territory": "All Territories"
+    },
+    {
+      "customer_name": "BuildRight Construction",
+      "customer_group": "Commercial",
+      "territory": "All Territories"
+    }
+  ],
+  "suppliers": [
+    {
+      "supplier_name": "Steel Corp India",
+      "supplier_group": "Raw Material"
+    },
+    {
+      "supplier_name": "FastenerWorld",
+      "supplier_group": "Raw Material"
+    }
+  ],
+  "warehouses": [
+    {
+      "warehouse_name": "Raw Material Store",
+      "warehouse_type": "Storage"
+    },
+    {
+      "warehouse_name": "Finished Goods Store",
+      "warehouse_type": "Storage"
+    },
+    {
+      "warehouse_name": "Work in Progress",
+      "warehouse_type": "Storage"
+    }
+  ],
+  "demo_scenarios": [
+    {
+      "title": "Production Order",
+      "description": "Create and process a work order for Steel Frame Assembly"
+    },
+    {
+      "title": "Material Procurement",
+      "description": "Generate purchase orders from BOM material requirements"
+    }
+  ]
+}

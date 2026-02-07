@@ -1,0 +1,294 @@
+{
+  "actions": [],
+  "creation": "2025-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "track_changes": 1,
+  "field_order": [
+    "status",
+    "company_section",
+    "company_name",
+    "contact_name",
+    "contact_email",
+    "contact_phone",
+    "column_break_1",
+    "employee_count",
+    "industry",
+    "region",
+    "package_section",
+    "package_tier",
+    "recommended_tier",
+    "selected_modules",
+    "priority_features",
+    "pain_points",
+    "provisioning_section",
+    "subdomain",
+    "site_url",
+    "demo_site",
+    "column_break_2",
+    "provisioning_started",
+    "provisioning_completed",
+    "trial_expires",
+    "credentials_section",
+    "demo_username",
+    "demo_password",
+    "credentials_sent",
+    "logs_section",
+    "provisioning_log",
+    "error_message",
+    "tracking_section",
+    "source",
+    "utm_campaign",
+    "utm_source",
+    "utm_medium",
+    "ip_address"
+  ],
+  "fields": [
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Pending\nProvisioning\nActive\nExpired\nFailed\nCancelled",
+      "default": "Pending",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "company_section",
+      "fieldtype": "Section Break",
+      "label": "Company Information"
+    },
+    {
+      "fieldname": "company_name",
+      "fieldtype": "Data",
+      "label": "Company Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "contact_name",
+      "fieldtype": "Data",
+      "label": "Contact Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "contact_email",
+      "fieldtype": "Data",
+      "label": "Contact Email",
+      "reqd": 1,
+      "options": "Email",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "contact_phone",
+      "fieldtype": "Data",
+      "label": "Contact Phone",
+      "options": "Phone"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "employee_count",
+      "fieldtype": "Int",
+      "label": "Employee Count",
+      "reqd": 1
+    },
+    {
+      "fieldname": "industry",
+      "fieldtype": "Link",
+      "label": "Industry",
+      "options": "Industry Template",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "region",
+      "fieldtype": "Select",
+      "label": "Region",
+      "options": "India\nSoutheast Asia\nMiddle East & Africa\nEurope & UK",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "package_section",
+      "fieldtype": "Section Break",
+      "label": "Package Selection"
+    },
+    {
+      "fieldname": "package_tier",
+      "fieldtype": "Link",
+      "label": "Package Tier",
+      "options": "Package Tier",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "recommended_tier",
+      "fieldtype": "Link",
+      "label": "Recommended Tier (Auto)",
+      "options": "Package Tier",
+      "read_only": 1
+    },
+    {
+      "fieldname": "selected_modules",
+      "fieldtype": "Table MultiSelect",
+      "label": "Selected Modules",
+      "options": "Demo Request Module"
+    },
+    {
+      "fieldname": "priority_features",
+      "fieldtype": "Small Text",
+      "label": "Priority Features"
+    },
+    {
+      "fieldname": "pain_points",
+      "fieldtype": "Text",
+      "label": "Pain Points / Notes"
+    },
+    {
+      "fieldname": "provisioning_section",
+      "fieldtype": "Section Break",
+      "label": "Provisioning Details"
+    },
+    {
+      "fieldname": "subdomain",
+      "fieldtype": "Data",
+      "label": "Subdomain"
+    },
+    {
+      "fieldname": "site_url",
+      "fieldtype": "Data",
+      "label": "Site URL",
+      "read_only": 1
+    },
+    {
+      "fieldname": "demo_site",
+      "fieldtype": "Link",
+      "label": "Demo Site",
+      "options": "Demo Site",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "provisioning_started",
+      "fieldtype": "Datetime",
+      "label": "Provisioning Started",
+      "read_only": 1
+    },
+    {
+      "fieldname": "provisioning_completed",
+      "fieldtype": "Datetime",
+      "label": "Provisioning Completed",
+      "read_only": 1
+    },
+    {
+      "fieldname": "trial_expires",
+      "fieldtype": "Date",
+      "label": "Trial Expires",
+      "read_only": 1
+    },
+    {
+      "fieldname": "credentials_section",
+      "fieldtype": "Section Break",
+      "label": "Credentials"
+    },
+    {
+      "fieldname": "demo_username",
+      "fieldtype": "Data",
+      "label": "Demo Username",
+      "read_only": 1
+    },
+    {
+      "fieldname": "demo_password",
+      "fieldtype": "Password",
+      "label": "Demo Password"
+    },
+    {
+      "fieldname": "credentials_sent",
+      "fieldtype": "Check",
+      "label": "Credentials Email Sent",
+      "read_only": 1
+    },
+    {
+      "fieldname": "logs_section",
+      "fieldtype": "Section Break",
+      "label": "Provisioning Logs",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "provisioning_log",
+      "fieldtype": "Code",
+      "label": "Provisioning Log",
+      "read_only": 1
+    },
+    {
+      "fieldname": "error_message",
+      "fieldtype": "Small Text",
+      "label": "Error Message",
+      "read_only": 1
+    },
+    {
+      "fieldname": "tracking_section",
+      "fieldtype": "Section Break",
+      "label": "Tracking",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "source",
+      "fieldtype": "Data",
+      "label": "Lead Source"
+    },
+    {
+      "fieldname": "utm_campaign",
+      "fieldtype": "Data",
+      "label": "UTM Campaign"
+    },
+    {
+      "fieldname": "utm_source",
+      "fieldtype": "Data",
+      "label": "UTM Source"
+    },
+    {
+      "fieldname": "utm_medium",
+      "fieldtype": "Data",
+      "label": "UTM Medium"
+    },
+    {
+      "fieldname": "ip_address",
+      "fieldtype": "Data",
+      "label": "IP Address",
+      "read_only": 1
+    }
+  ],
+  "links": [],
+  "modified": "2025-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Frappe Kit",
+  "name": "Demo Request",
+  "naming_rule": "Expression",
+  "autoname": "DEMO-.YYYY.-.#####",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    },
+    {
+      "role": "Guest",
+      "read": 0,
+      "write": 0,
+      "create": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

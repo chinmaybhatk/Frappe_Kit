@@ -1,0 +1,70 @@
+{
+  "items": [
+    {
+      "item_code": "PROD-001",
+      "item_name": "Wireless Earbuds",
+      "item_group": "Electronics",
+      "standard_rate": 2999,
+      "stock_uom": "Nos"
+    },
+    {
+      "item_code": "PROD-002",
+      "item_name": "Smart Watch",
+      "item_group": "Electronics",
+      "standard_rate": 4999,
+      "stock_uom": "Nos"
+    },
+    {
+      "item_code": "PROD-003",
+      "item_name": "Bluetooth Speaker",
+      "item_group": "Electronics",
+      "standard_rate": 1999,
+      "stock_uom": "Nos"
+    },
+    {
+      "item_code": "PROD-004",
+      "item_name": "Phone Case",
+      "item_group": "Accessories",
+      "standard_rate": 499,
+      "stock_uom": "Nos"
+    }
+  ],
+  "customers": [
+    {
+      "customer_name": "Walk-in Customer",
+      "customer_group": "Retail",
+      "territory": "All Territories"
+    },
+    {
+      "customer_name": "Premium Member",
+      "customer_group": "Retail",
+      "territory": "All Territories"
+    }
+  ],
+  "suppliers": [
+    {
+      "supplier_name": "Tech Distributors",
+      "supplier_group": "Distributor"
+    }
+  ],
+  "warehouses": [
+    {
+      "warehouse_name": "Main Store",
+      "warehouse_type": "Store"
+    },
+    {
+      "warehouse_name": "Back Storage",
+      "warehouse_type": "Storage"
+    }
+  ],
+  "demo_scenarios": [
+    {
+      "title": "POS Sale",
+      "description": "Process a walk-in customer purchase using Point of Sale"
+    },
+    {
+      "title": "Stock Replenishment",
+      "description": "Create purchase order when stock falls below reorder level"
+    }
+  ]
+}

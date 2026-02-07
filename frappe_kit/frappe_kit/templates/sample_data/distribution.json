@@ -1,0 +1,83 @@
+{
+  "items": [
+    {
+      "item_code": "DIST-001",
+      "item_name": "Organic Rice 5kg",
+      "item_group": "FMCG",
+      "standard_rate": 450,
+      "stock_uom": "Nos"
+    },
+    {
+      "item_code": "DIST-002",
+      "item_name": "Cooking Oil 1L",
+      "item_group": "FMCG",
+      "standard_rate": 180,
+      "stock_uom": "Nos"
+    },
+    {
+      "item_code": "DIST-003",
+      "item_name": "Wheat Flour 10kg",
+      "item_group": "FMCG",
+      "standard_rate": 380,
+      "stock_uom": "Nos"
+    },
+    {
+      "item_code": "DIST-004",
+      "item_name": "Sugar 5kg",
+      "item_group": "FMCG",
+      "standard_rate": 250,
+      "stock_uom": "Nos"
+    }
+  ],
+  "customers": [
+    {
+      "customer_name": "Metro Supermarket",
+      "customer_group": "Retail",
+      "territory": "All Territories"
+    },
+    {
+      "customer_name": "FreshMart Chain",
+      "customer_group": "Retail",
+      "territory": "All Territories"
+    },
+    {
+      "customer_name": "Kirana Store Network",
+      "customer_group": "Retail",
+      "territory": "All Territories"
+    }
+  ],
+  "suppliers": [
+    {
+      "supplier_name": "AgriFresh Producers",
+      "supplier_group": "Agricultural"
+    },
+    {
+      "supplier_name": "National Foods Ltd",
+      "supplier_group": "Manufacturer"
+    }
+  ],
+  "warehouses": [
+    {
+      "warehouse_name": "Central Warehouse",
+      "warehouse_type": "Storage"
+    },
+    {
+      "warehouse_name": "North Distribution Center",
+      "warehouse_type": "Storage"
+    },
+    {
+      "warehouse_name": "South Distribution Center",
+      "warehouse_type": "Storage"
+    }
+  ],
+  "demo_scenarios": [
+    {
+      "title": "Bulk Order Processing",
+      "description": "Process a large order with multiple items and delivery locations"
+    },
+    {
+      "title": "Stock Transfer",
+      "description": "Transfer inventory between distribution centers"
+    }
+  ]
+}

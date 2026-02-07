@@ -1,0 +1,151 @@
+{
+  "actions": [],
+  "creation": "2025-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "issingle": 1,
+  "field_order": [
+    "frappe_cloud_section",
+    "frappe_cloud_api_key",
+    "frappe_cloud_api_secret",
+    "frappe_cloud_team",
+    "default_region",
+    "domain_section",
+    "demo_domain",
+    "subdomain_prefix",
+    "trial_section",
+    "default_trial_days",
+    "max_extensions",
+    "extension_days",
+    "email_section",
+    "welcome_email_template",
+    "expiry_warning_template",
+    "expiry_warning_days",
+    "limits_section",
+    "max_concurrent_demos",
+    "daily_provisioning_limit"
+  ],
+  "fields": [
+    {
+      "fieldname": "frappe_cloud_section",
+      "fieldtype": "Section Break",
+      "label": "Frappe Cloud API"
+    },
+    {
+      "fieldname": "frappe_cloud_api_key",
+      "fieldtype": "Password",
+      "label": "API Key"
+    },
+    {
+      "fieldname": "frappe_cloud_api_secret",
+      "fieldtype": "Password",
+      "label": "API Secret"
+    },
+    {
+      "fieldname": "frappe_cloud_team",
+      "fieldtype": "Data",
+      "label": "Team Name"
+    },
+    {
+      "fieldname": "default_region",
+      "fieldtype": "Select",
+      "label": "Default Cloud Region",
+      "options": "Mumbai\nSingapore\nFrankfurt\nN. Virginia"
+    },
+    {
+      "fieldname": "domain_section",
+      "fieldtype": "Section Break",
+      "label": "Domain Settings"
+    },
+    {
+      "fieldname": "demo_domain",
+      "fieldtype": "Data",
+      "label": "Demo Domain",
+      "default": "frappe.cloud"
+    },
+    {
+      "fieldname": "subdomain_prefix",
+      "fieldtype": "Data",
+      "label": "Subdomain Prefix",
+      "description": "e.g., 'demo-' results in demo-companyname.frappe.cloud"
+    },
+    {
+      "fieldname": "trial_section",
+      "fieldtype": "Section Break",
+      "label": "Trial Settings"
+    },
+    {
+      "fieldname": "default_trial_days",
+      "fieldtype": "Int",
+      "label": "Default Trial Days",
+      "default": "14"
+    },
+    {
+      "fieldname": "max_extensions",
+      "fieldtype": "Int",
+      "label": "Max Trial Extensions",
+      "default": "2"
+    },
+    {
+      "fieldname": "extension_days",
+      "fieldtype": "Int",
+      "label": "Days per Extension",
+      "default": "7"
+    },
+    {
+      "fieldname": "email_section",
+      "fieldtype": "Section Break",
+      "label": "Email Settings"
+    },
+    {
+      "fieldname": "welcome_email_template",
+      "fieldtype": "Link",
+      "label": "Welcome Email Template",
+      "options": "Email Template"
+    },
+    {
+      "fieldname": "expiry_warning_template",
+      "fieldtype": "Link",
+      "label": "Expiry Warning Template",
+      "options": "Email Template"
+    },
+    {
+      "fieldname": "expiry_warning_days",
+      "fieldtype": "Int",
+      "label": "Warn Days Before Expiry",
+      "default": "3"
+    },
+    {
+      "fieldname": "limits_section",
+      "fieldtype": "Section Break",
+      "label": "Limits"
+    },
+    {
+      "fieldname": "max_concurrent_demos",
+      "fieldtype": "Int",
+      "label": "Max Concurrent Demo Sites",
+      "default": "50"
+    },
+    {
+      "fieldname": "daily_provisioning_limit",
+      "fieldtype": "Int",
+      "label": "Daily Provisioning Limit",
+      "default": "20"
+    }
+  ],
+  "links": [],
+  "modified": "2025-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Frappe Kit",
+  "name": "Provisioner Settings",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

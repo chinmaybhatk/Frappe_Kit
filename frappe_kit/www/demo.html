@@ -1,0 +1,437 @@
+{% extends "templates/web.html" %}
+
+{% block title %}Try ERPNext - Free Demo{% endblock %}
+
+{% block head_include %}
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+      }
+    }
+  }
+</script>
+<style>
+  .step { display: none; }
+  .step.active { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .tier-card { transition: all 0.2s ease; }
+  .tier-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.12); }
+  .tier-card.selected { ring: 2px; }
+  .log-line { animation: slideIn 0.2s ease; }
+  @keyframes slideIn { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
+  .pulse-dot { animation: pulse 1.5s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div class="min-h-screen bg-gray-50">
+
+  <!-- ========== STEP 1: Hero + Package Selection ========== -->
+  <section id="step-landing" class="step active">
+
+    <!-- Hero -->
+    <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 text-white">
+      <div class="max-w-5xl mx-auto px-4 py-16 sm:py-20 text-center">
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
+          Try ERPNext Free for 14 Days
+        </h1>
+        <p class="text-lg sm:text-xl text-indigo-100 max-w-2xl mx-auto mb-2">
+          Get your own fully configured ERPNext instance in under 3 minutes.<br>
+          No credit card required.
+        </p>
+        <div class="mt-6 flex items-center justify-center gap-6 text-sm text-indigo-200">
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Full ERP Suite
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Sample Data Included
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Cloud Hosted
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Package Cards -->
+    <div class="max-w-5xl mx-auto px-4 -mt-10 pb-16">
+      <div id="tiers-container" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Cards loaded dynamically -->
+        <div class="col-span-3 text-center py-12 text-gray-400">Loading plans...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STEP 2: Company Details Form ========== -->
+  <section id="step-form" class="step">
+    <div class="max-w-2xl mx-auto px-4 py-12">
+
+      <!-- Back link -->
+      <button onclick="showStep('landing')" class="flex items-center gap-1 text-indigo-600 hover:text-indigo-800 text-sm font-medium mb-6">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Change plan
+      </button>
+
+      <!-- Selected plan banner -->
+      <div id="selected-plan-banner" class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 mb-8 flex items-center justify-between">
+        <div>
+          <span class="text-sm text-indigo-600 font-medium">Selected Plan</span>
+          <h3 id="selected-plan-name" class="text-lg font-bold text-gray-900"></h3>
+        </div>
+        <span id="selected-plan-price" class="text-2xl font-bold text-indigo-600"></span>
+      </div>
+
+      <!-- Form -->
+      <form id="demo-form" class="space-y-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Company Name *</label>
+            <input type="text" name="company_name" required
+              class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
+              placeholder="Acme Corp">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Your Name *</label>
+            <input type="text" name="contact_name" required
+              class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
+              placeholder="Jane Smith">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Work Email *</label>
+            <input type="email" name="contact_email" required
+              class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
+              placeholder="jane@acme.com">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+            <input type="tel" name="contact_phone"
+              class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
+              placeholder="+91 98765 43210">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Employee Count *</label>
+            <input type="number" name="employee_count" required min="1"
+              class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
+              placeholder="50">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Region</label>
+            <select name="region"
+              class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition bg-white">
+              <option value="India">India</option>
+              <option value="Southeast Asia">Southeast Asia</option>
+              <option value="Middle East & Africa">Middle East & Africa</option>
+              <option value="Europe & UK">Europe & UK</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Industry</label>
+          <select name="industry" id="industry-select"
+            class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition bg-white">
+            <option value="">Select your industry (optional)</option>
+          </select>
+        </div>
+
+        <input type="hidden" name="package_tier" id="package-tier-input">
+
+        <!-- Error message area -->
+        <div id="form-error" class="hidden bg-red-50 border border-red-200 text-red-700 rounded-lg p-3 text-sm"></div>
+
+        <button type="submit" id="submit-btn"
+          class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl text-base transition shadow-lg shadow-indigo-200 disabled:opacity-50 disabled:cursor-not-allowed">
+          Start Free Trial
+        </button>
+
+        <p class="text-center text-xs text-gray-400 mt-2">
+          No credit card required. Your demo site will be ready in ~3 minutes.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========== STEP 3: Provisioning Progress ========== -->
+  <section id="step-provisioning" class="step">
+    <div class="max-w-2xl mx-auto px-4 py-16 text-center">
+
+      <!-- Progress header (shown while provisioning) -->
+      <div id="prov-progress" class="">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-indigo-100 rounded-full mb-6">
+          <svg class="w-8 h-8 text-indigo-600 animate-spin" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Setting up your demo</h2>
+        <p class="text-gray-500 mb-8">This usually takes 2-3 minutes. Hang tight!</p>
+      </div>
+
+      <!-- Terminal log -->
+      <div id="terminal" class="bg-gray-900 rounded-xl p-5 text-left font-mono text-sm max-h-64 overflow-y-auto mb-8 shadow-xl">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="w-3 h-3 rounded-full bg-red-400"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-400"></span>
+          <span class="w-3 h-3 rounded-full bg-green-400"></span>
+          <span class="ml-2 text-gray-500 text-xs">provisioning</span>
+        </div>
+        <div id="terminal-log"></div>
+      </div>
+
+      <!-- Success (hidden initially) -->
+      <div id="prov-success" class="hidden">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
+          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Your demo is ready!</h2>
+        <p class="text-gray-500 mb-6">Login credentials have been sent to your email.</p>
+
+        <div class="bg-gray-50 rounded-xl p-6 mb-6 text-left max-w-sm mx-auto">
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between">
+              <span class="text-gray-500">Site URL</span>
+              <a id="cred-url" href="#" target="_blank" class="text-indigo-600 font-medium hover:underline"></a>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-500">Username</span>
+              <span id="cred-user" class="font-medium text-gray-900"></span>
+            </div>
+          </div>
+        </div>
+
+        <a id="open-site-btn" href="#" target="_blank"
+          class="inline-flex items-center gap-2 px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl transition shadow-lg shadow-green-200">
+          Open Demo Site
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
+
+      <!-- Failure (hidden initially) -->
+      <div id="prov-failed" class="hidden">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-6">
+          <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Something went wrong</h2>
+        <p id="error-msg" class="text-red-600 mb-6"></p>
+        <button onclick="showStep('form')" class="px-6 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg transition">
+          Try Again
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // ── State ──
+  let selectedTier = null;
+  let demoRequestId = null;
+  let pollTimer = null;
+
+  const API = '/api/method/frappe_kit.frappe_kit.api.provisioning';
+
+  // ── Step navigation ──
+  window.showStep = function(step) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-' + step).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // ── Load package tiers ──
+  fetch(API + '.get_package_tiers')
+    .then(r => r.json())
+    .then(data => {
+      const tiers = data.message || [];
+      const container = document.getElementById('tiers-container');
+      if (!tiers.length) {
+        container.innerHTML = '<div class="col-span-3 text-center py-12 text-gray-400">No plans available yet. Please configure Package Tiers in the admin.</div>';
+        return;
+      }
+
+      container.innerHTML = tiers.map(tier => {
+        const isPopular = tier.is_popular;
+        const price = tier.price_india || 'Free';
+        const priceLabel = price === 'Free' ? 'Free' : '\u20B9' + Number(price).toLocaleString('en-IN') + '/mo';
+
+        const modules = [];
+        if (tier.include_accounting) modules.push('Accounting');
+        if (tier.include_inventory) modules.push('Inventory');
+        if (tier.include_sales) modules.push('CRM & Sales');
+        if (tier.include_hr) modules.push('HR & Payroll');
+        if (tier.include_support) modules.push('Helpdesk');
+        if (tier.include_manufacturing) modules.push('Manufacturing');
+
+        return '<div class="tier-card relative bg-white rounded-2xl border-2 ' +
+          (isPopular ? 'border-indigo-500 shadow-xl' : 'border-gray-200 shadow') +
+          ' p-6 flex flex-col cursor-pointer" data-tier="' + tier.name + '">' +
+          (isPopular ? '<span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-xs font-semibold px-3 py-1 rounded-full">Most Popular</span>' : '') +
+          '<h3 class="text-xl font-bold text-gray-900 mb-1">' + (tier.display_name || tier.tier_name) + '</h3>' +
+          '<p class="text-sm text-gray-500 mb-4 flex-grow">' + (tier.description || '') + '</p>' +
+          '<div class="mb-4"><span class="text-3xl font-extrabold text-gray-900">' + priceLabel + '</span></div>' +
+          '<div class="text-sm text-gray-500 mb-4">' + (tier.employee_range_min || 1) + ' - ' + (tier.employee_range_max || '500+') + ' employees</div>' +
+          '<ul class="space-y-2 mb-6 text-sm">' +
+          modules.map(m => '<li class="flex items-center gap-2 text-gray-700"><svg class="w-4 h-4 text-green-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>' + m + '</li>').join('') +
+          '</ul>' +
+          '<button class="w-full py-2.5 rounded-xl font-semibold transition ' +
+          (isPopular ? 'bg-indigo-600 text-white hover:bg-indigo-700' : 'bg-gray-100 text-gray-800 hover:bg-gray-200') +
+          '">Select Plan</button>' +
+          '</div>';
+      }).join('');
+
+      // Attach click handlers
+      container.querySelectorAll('.tier-card').forEach(card => {
+        card.addEventListener('click', function() {
+          const tierName = this.dataset.tier;
+          const tier = tiers.find(t => t.name === tierName);
+          selectTier(tier);
+        });
+      });
+    })
+    .catch(() => {
+      document.getElementById('tiers-container').innerHTML =
+        '<div class="col-span-3 text-center py-12 text-red-400">Failed to load plans. Please refresh.</div>';
+    });
+
+  // ── Load industries ──
+  fetch(API + '.get_industries')
+    .then(r => r.json())
+    .then(data => {
+      const select = document.getElementById('industry-select');
+      (data.message || []).forEach(ind => {
+        const opt = document.createElement('option');
+        opt.value = ind.name;
+        opt.textContent = (ind.icon ? ind.icon + ' ' : '') + ind.industry_name;
+        select.appendChild(opt);
+      });
+    });
+
+  // ── Select tier ──
+  function selectTier(tier) {
+    selectedTier = tier;
+    document.getElementById('package-tier-input').value = tier.name;
+    document.getElementById('selected-plan-name').textContent = tier.display_name || tier.tier_name;
+
+    const price = tier.price_india || 'Free';
+    document.getElementById('selected-plan-price').textContent =
+      price === 'Free' ? 'Free' : '\u20B9' + Number(price).toLocaleString('en-IN') + '/mo';
+
+    showStep('form');
+  }
+
+  // ── Form submit ──
+  document.getElementById('demo-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const btn = document.getElementById('submit-btn');
+    const errDiv = document.getElementById('form-error');
+    errDiv.classList.add('hidden');
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+
+    const formData = new FormData(this);
+    const payload = Object.fromEntries(formData);
+
+    fetch(API + '.submit_demo_request', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Frappe-CSRF-Token': frappe.csrf_token
+      },
+      body: JSON.stringify({ data: payload })
+    })
+    .then(r => r.json())
+    .then(result => {
+      if (result.message && result.message.status === 'success') {
+        demoRequestId = result.message.demo_request;
+        showStep('provisioning');
+        startPolling();
+      } else {
+        throw new Error(result.exc || result._server_messages || 'Submission failed');
+      }
+    })
+    .catch(err => {
+      let msg = err.message || 'Something went wrong';
+      try {
+        const parsed = JSON.parse(msg);
+        if (Array.isArray(parsed)) msg = JSON.parse(parsed[0]).message;
+      } catch(_) {}
+      errDiv.textContent = msg;
+      errDiv.classList.remove('hidden');
+    })
+    .finally(() => {
+      btn.disabled = false;
+      btn.textContent = 'Start Free Trial';
+    });
+  });
+
+  // ── Polling ──
+  function startPolling() {
+    const logEl = document.getElementById('terminal-log');
+    let lastLog = '';
+
+    function poll() {
+      fetch(API + '.check_provisioning_status?' + new URLSearchParams({ demo_request: demoRequestId }))
+        .then(r => r.json())
+        .then(result => {
+          const data = result.message || {};
+
+          // Update terminal log
+          if (data.log && data.log !== lastLog) {
+            lastLog = data.log;
+            const lines = data.log.trim().split('\n');
+            logEl.innerHTML = lines.map(line =>
+              '<div class="log-line text-green-400 mb-1">' +
+              '<span class="text-gray-600">$</span> ' +
+              line.replace(/\[.*?\]\s*/, '') +
+              '</div>'
+            ).join('');
+            logEl.parentElement.scrollTop = logEl.parentElement.scrollHeight;
+          }
+
+          if (data.status === 'Active') {
+            clearInterval(pollTimer);
+            document.getElementById('prov-progress').classList.add('hidden');
+            document.getElementById('prov-success').classList.remove('hidden');
+
+            if (data.site_url) {
+              document.getElementById('cred-url').textContent = data.site_url.replace('https://', '');
+              document.getElementById('cred-url').href = data.site_url;
+              document.getElementById('open-site-btn').href = data.site_url;
+            }
+            document.getElementById('cred-user').textContent = 'Check your email';
+          } else if (data.status === 'Failed') {
+            clearInterval(pollTimer);
+            document.getElementById('prov-progress').classList.add('hidden');
+            document.getElementById('prov-failed').classList.remove('hidden');
+            document.getElementById('error-msg').textContent = data.error || 'Provisioning failed. Please try again.';
+          }
+        })
+        .catch(() => {});
+    }
+
+    poll();
+    pollTimer = setInterval(poll, 5000);
+  }
+
+});
+</script>
+{% endblock %}

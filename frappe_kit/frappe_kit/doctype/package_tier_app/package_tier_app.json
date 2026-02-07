@@ -1,0 +1,43 @@
+{
+  "actions": [],
+  "creation": "2025-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "app_name",
+    "app_title",
+    "is_required"
+  ],
+  "fields": [
+    {
+      "fieldname": "app_name",
+      "fieldtype": "Data",
+      "label": "App Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "app_title",
+      "fieldtype": "Data",
+      "label": "App Title",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "is_required",
+      "fieldtype": "Check",
+      "label": "Required",
+      "default": "1",
+      "in_list_view": 1
+    }
+  ],
+  "istable": 1,
+  "links": [],
+  "modified": "2025-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Frappe Kit",
+  "name": "Package Tier App",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

@@ -1,0 +1,206 @@
+{
+  "actions": [],
+  "creation": "2025-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "tier_name",
+    "display_name",
+    "description",
+    "employee_range_min",
+    "employee_range_max",
+    "pricing_section",
+    "price_india",
+    "price_sea",
+    "price_mea",
+    "price_europe",
+    "modules_section",
+    "include_accounting",
+    "include_inventory",
+    "include_sales",
+    "include_support",
+    "include_hr",
+    "include_manufacturing",
+    "apps_section",
+    "frappe_apps",
+    "frappe_cloud_plan",
+    "trial_days",
+    "display_section",
+    "sort_order",
+    "is_popular",
+    "color_theme",
+    "features_html"
+  ],
+  "fields": [
+    {
+      "fieldname": "tier_name",
+      "fieldtype": "Data",
+      "label": "Tier Name",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "display_name",
+      "fieldtype": "Data",
+      "label": "Display Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "Description"
+    },
+    {
+      "fieldname": "employee_range_min",
+      "fieldtype": "Int",
+      "label": "Min Employees",
+      "default": "1"
+    },
+    {
+      "fieldname": "employee_range_max",
+      "fieldtype": "Int",
+      "label": "Max Employees",
+      "default": "15"
+    },
+    {
+      "fieldname": "pricing_section",
+      "fieldtype": "Section Break",
+      "label": "Pricing"
+    },
+    {
+      "fieldname": "price_india",
+      "fieldtype": "Currency",
+      "label": "Price (India)",
+      "options": "INR"
+    },
+    {
+      "fieldname": "price_sea",
+      "fieldtype": "Currency",
+      "label": "Price (Southeast Asia)",
+      "options": "USD"
+    },
+    {
+      "fieldname": "price_mea",
+      "fieldtype": "Currency",
+      "label": "Price (Middle East & Africa)",
+      "options": "USD"
+    },
+    {
+      "fieldname": "price_europe",
+      "fieldtype": "Currency",
+      "label": "Price (Europe & UK)",
+      "options": "EUR"
+    },
+    {
+      "fieldname": "modules_section",
+      "fieldtype": "Section Break",
+      "label": "Included Modules"
+    },
+    {
+      "fieldname": "include_accounting",
+      "fieldtype": "Check",
+      "label": "Accounting & Finance",
+      "default": "1"
+    },
+    {
+      "fieldname": "include_inventory",
+      "fieldtype": "Check",
+      "label": "Inventory & Stock",
+      "default": "1"
+    },
+    {
+      "fieldname": "include_sales",
+      "fieldtype": "Check",
+      "label": "Sales & CRM",
+      "default": "1"
+    },
+    {
+      "fieldname": "include_support",
+      "fieldtype": "Check",
+      "label": "Customer Support",
+      "default": "1"
+    },
+    {
+      "fieldname": "include_hr",
+      "fieldtype": "Check",
+      "label": "HR & Payroll",
+      "default": "0"
+    },
+    {
+      "fieldname": "include_manufacturing",
+      "fieldtype": "Check",
+      "label": "Manufacturing",
+      "default": "0"
+    },
+    {
+      "fieldname": "apps_section",
+      "fieldtype": "Section Break",
+      "label": "Frappe Apps"
+    },
+    {
+      "fieldname": "frappe_apps",
+      "fieldtype": "Table",
+      "label": "Apps to Install",
+      "options": "Package Tier App"
+    },
+    {
+      "fieldname": "frappe_cloud_plan",
+      "fieldtype": "Data",
+      "label": "Frappe Cloud Plan",
+      "description": "Plan name to use when provisioning"
+    },
+    {
+      "fieldname": "trial_days",
+      "fieldtype": "Int",
+      "label": "Trial Duration (Days)",
+      "default": "14"
+    },
+    {
+      "fieldname": "display_section",
+      "fieldtype": "Section Break",
+      "label": "Display"
+    },
+    {
+      "fieldname": "sort_order",
+      "fieldtype": "Int",
+      "label": "Sort Order",
+      "default": "0"
+    },
+    {
+      "fieldname": "is_popular",
+      "fieldtype": "Check",
+      "label": "Mark as Popular"
+    },
+    {
+      "fieldname": "color_theme",
+      "fieldtype": "Select",
+      "label": "Color Theme",
+      "options": "blue\npurple\ngreen\norange"
+    },
+    {
+      "fieldname": "features_html",
+      "fieldtype": "Text Editor",
+      "label": "Features (for display)"
+    }
+  ],
+  "links": [],
+  "modified": "2025-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Frappe Kit",
+  "name": "Package Tier",
+  "naming_rule": "By fieldname",
+  "autoname": "field:tier_name",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    }
+  ],
+  "sort_field": "sort_order",
+  "sort_order": "ASC"
+}

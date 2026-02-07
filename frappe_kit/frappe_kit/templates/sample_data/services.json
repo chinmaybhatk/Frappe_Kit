@@ -1,0 +1,54 @@
+{
+  "items": [
+    {
+      "item_code": "SVC-001",
+      "item_name": "IT Consulting - Per Hour",
+      "item_group": "Services",
+      "standard_rate": 5000,
+      "stock_uom": "Hour"
+    },
+    {
+      "item_code": "SVC-002",
+      "item_name": "Cloud Migration Package",
+      "item_group": "Services",
+      "standard_rate": 250000,
+      "stock_uom": "Nos"
+    },
+    {
+      "item_code": "SVC-003",
+      "item_name": "Annual Support Contract",
+      "item_group": "Services",
+      "standard_rate": 120000,
+      "stock_uom": "Nos"
+    }
+  ],
+  "customers": [
+    {
+      "customer_name": "TechStart Inc",
+      "customer_group": "Commercial",
+      "territory": "All Territories"
+    },
+    {
+      "customer_name": "GlobalRetail Corp",
+      "customer_group": "Commercial",
+      "territory": "All Territories"
+    }
+  ],
+  "suppliers": [
+    {
+      "supplier_name": "Cloud Infra Partners",
+      "supplier_group": "Service Provider"
+    }
+  ],
+  "warehouses": [],
+  "demo_scenarios": [
+    {
+      "title": "Project Billing",
+      "description": "Create a project, log timesheets, and generate invoice"
+    },
+    {
+      "title": "Support Ticket",
+      "description": "Handle a customer support ticket from creation to resolution"
+    }
+  ]
+}

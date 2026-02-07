@@ -1,0 +1,155 @@
+{
+  "actions": [],
+  "creation": "2025-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "subdomain",
+    "full_url",
+    "status",
+    "demo_request",
+    "column_break_1",
+    "package_tier",
+    "industry",
+    "region",
+    "cloud_section",
+    "frappe_cloud_site_id",
+    "frappe_cloud_plan",
+    "apps_installed",
+    "dates_section",
+    "created_at",
+    "expires_at",
+    "last_accessed",
+    "column_break_2",
+    "extended_count",
+    "converted_to_paid"
+  ],
+  "fields": [
+    {
+      "fieldname": "subdomain",
+      "fieldtype": "Data",
+      "label": "Subdomain",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "full_url",
+      "fieldtype": "Data",
+      "label": "Full URL",
+      "read_only": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Creating\nActive\nSuspended\nDeleted",
+      "default": "Creating",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "demo_request",
+      "fieldtype": "Link",
+      "label": "Demo Request",
+      "options": "Demo Request"
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "package_tier",
+      "fieldtype": "Link",
+      "label": "Package Tier",
+      "options": "Package Tier",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "industry",
+      "fieldtype": "Link",
+      "label": "Industry",
+      "options": "Industry Template"
+    },
+    {
+      "fieldname": "region",
+      "fieldtype": "Data",
+      "label": "Region"
+    },
+    {
+      "fieldname": "cloud_section",
+      "fieldtype": "Section Break",
+      "label": "Frappe Cloud Details"
+    },
+    {
+      "fieldname": "frappe_cloud_site_id",
+      "fieldtype": "Data",
+      "label": "Frappe Cloud Site ID"
+    },
+    {
+      "fieldname": "frappe_cloud_plan",
+      "fieldtype": "Data",
+      "label": "Frappe Cloud Plan"
+    },
+    {
+      "fieldname": "apps_installed",
+      "fieldtype": "Small Text",
+      "label": "Apps Installed"
+    },
+    {
+      "fieldname": "dates_section",
+      "fieldtype": "Section Break",
+      "label": "Dates"
+    },
+    {
+      "fieldname": "created_at",
+      "fieldtype": "Datetime",
+      "label": "Created At",
+      "default": "Now"
+    },
+    {
+      "fieldname": "expires_at",
+      "fieldtype": "Datetime",
+      "label": "Expires At"
+    },
+    {
+      "fieldname": "last_accessed",
+      "fieldtype": "Datetime",
+      "label": "Last Accessed"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "extended_count",
+      "fieldtype": "Int",
+      "label": "Extension Count",
+      "default": "0"
+    },
+    {
+      "fieldname": "converted_to_paid",
+      "fieldtype": "Check",
+      "label": "Converted to Paid"
+    }
+  ],
+  "links": [],
+  "modified": "2025-01-01 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Frappe Kit",
+  "name": "Demo Site",
+  "naming_rule": "Expression",
+  "autoname": "SITE-.#####",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}
