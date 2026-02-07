@@ -1,0 +1,236 @@
+{
+  "actions": [],
+  "creation": "2025-01-15 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "demo_site",
+    "demo_request",
+    "column_break_info",
+    "contact_name",
+    "contact_email",
+    "company_name",
+    "conversion_section",
+    "conversion_type",
+    "status",
+    "production_section",
+    "production_plan",
+    "production_subdomain",
+    "column_break_prod",
+    "production_apps",
+    "production_site_url",
+    "admin_section",
+    "admin_notes",
+    "approved_by",
+    "column_break_admin",
+    "approved_on",
+    "conversion_started",
+    "conversion_completed",
+    "backup_section",
+    "backup_url",
+    "backup_created",
+    "logs_section",
+    "conversion_log",
+    "error_message"
+  ],
+  "fields": [
+    {
+      "fieldname": "demo_site",
+      "fieldtype": "Link",
+      "label": "Demo Site",
+      "options": "Demo Site",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "demo_request",
+      "fieldtype": "Link",
+      "label": "Demo Request",
+      "options": "Demo Request",
+      "fetch_from": "demo_site.demo_request",
+      "fetch_if_empty": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_info",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "contact_name",
+      "fieldtype": "Data",
+      "label": "Contact Name",
+      "fetch_from": "demo_request.contact_name",
+      "fetch_if_empty": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "contact_email",
+      "fieldtype": "Data",
+      "label": "Contact Email",
+      "options": "Email",
+      "fetch_from": "demo_request.contact_email",
+      "fetch_if_empty": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "company_name",
+      "fieldtype": "Data",
+      "label": "Company Name",
+      "fetch_from": "demo_request.company_name",
+      "fetch_if_empty": 1,
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "conversion_section",
+      "fieldtype": "Section Break",
+      "label": "Conversion Details"
+    },
+    {
+      "fieldname": "conversion_type",
+      "fieldtype": "Select",
+      "label": "Conversion Type",
+      "options": "\nFC Upgrade In Place\nFC New Site\nSelf Hosted",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Pending\nApproved\nIn Progress\nCompleted\nRejected\nFailed",
+      "default": "Pending",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "production_section",
+      "fieldtype": "Section Break",
+      "label": "Production Configuration"
+    },
+    {
+      "fieldname": "production_plan",
+      "fieldtype": "Data",
+      "label": "Production Plan",
+      "description": "Frappe Cloud plan for the production site"
+    },
+    {
+      "fieldname": "production_subdomain",
+      "fieldtype": "Data",
+      "label": "Production Subdomain",
+      "description": "Required for 'FC New Site' type",
+      "depends_on": "eval:doc.conversion_type=='FC New Site'"
+    },
+    {
+      "fieldname": "column_break_prod",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "production_apps",
+      "fieldtype": "Small Text",
+      "label": "Production Apps",
+      "description": "Comma-separated list of apps"
+    },
+    {
+      "fieldname": "production_site_url",
+      "fieldtype": "Data",
+      "label": "Production Site URL",
+      "read_only": 1
+    },
+    {
+      "fieldname": "admin_section",
+      "fieldtype": "Section Break",
+      "label": "Admin"
+    },
+    {
+      "fieldname": "admin_notes",
+      "fieldtype": "Small Text",
+      "label": "Admin Notes"
+    },
+    {
+      "fieldname": "approved_by",
+      "fieldtype": "Link",
+      "label": "Approved By",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_admin",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "approved_on",
+      "fieldtype": "Datetime",
+      "label": "Approved On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "conversion_started",
+      "fieldtype": "Datetime",
+      "label": "Conversion Started",
+      "read_only": 1
+    },
+    {
+      "fieldname": "conversion_completed",
+      "fieldtype": "Datetime",
+      "label": "Conversion Completed",
+      "read_only": 1
+    },
+    {
+      "fieldname": "backup_section",
+      "fieldtype": "Section Break",
+      "label": "Backup",
+      "collapsible": 1,
+      "depends_on": "eval:doc.conversion_type=='Self Hosted' || doc.conversion_type=='FC New Site'"
+    },
+    {
+      "fieldname": "backup_url",
+      "fieldtype": "Data",
+      "label": "Backup URL",
+      "read_only": 1
+    },
+    {
+      "fieldname": "backup_created",
+      "fieldtype": "Datetime",
+      "label": "Backup Created",
+      "read_only": 1
+    },
+    {
+      "fieldname": "logs_section",
+      "fieldtype": "Section Break",
+      "label": "Logs",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "conversion_log",
+      "fieldtype": "Code",
+      "label": "Conversion Log",
+      "read_only": 1
+    },
+    {
+      "fieldname": "error_message",
+      "fieldtype": "Small Text",
+      "label": "Error Message",
+      "read_only": 1
+    }
+  ],
+  "links": [],
+  "modified": "2025-01-15 00:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Frappe Kit",
+  "name": "Conversion Request",
+  "naming_rule": "Expression",
+  "autoname": "CONV-.YYYY.-.#####",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}

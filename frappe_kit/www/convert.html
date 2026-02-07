@@ -1,0 +1,317 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    .step { display: none; }
+    .step.active { display: block; }
+    .type-card { transition: all 0.2s ease; }
+    .type-card:hover { transform: translateY(-2px); }
+    .type-card.selected { ring: 2px; }
+</style>
+
+<!-- Loading -->
+<div id="step-loading" class="step active">
+    <div class="min-h-[60vh] flex items-center justify-center">
+        <div class="text-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
+            <p class="text-gray-600">Validating your conversion link...</p>
+        </div>
+    </div>
+</div>
+
+<!-- Error -->
+<div id="step-error" class="step">
+    <div class="min-h-[60vh] flex items-center justify-center">
+        <div class="text-center max-w-md">
+            <div class="text-red-500 text-5xl mb-4">&#10006;</div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Link Invalid or Expired</h2>
+            <p id="error-message" class="text-gray-600 mb-6">This conversion link is no longer valid. Please contact your account manager for a new link.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Step 1: Site Summary + Choose Conversion Type -->
+<div id="step-choose" class="step">
+    <div class="max-w-4xl mx-auto py-12 px-4">
+        <!-- Site Summary -->
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 text-white mb-10">
+            <h1 class="text-3xl font-bold mb-2">Go Live with Your Demo</h1>
+            <p class="text-indigo-100 mb-6">Your trial has been a great fit. Let's set up your production environment.</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div>
+                    <p class="text-indigo-200 text-sm">Company</p>
+                    <p id="info-company" class="font-semibold">-</p>
+                </div>
+                <div>
+                    <p class="text-indigo-200 text-sm">Current Plan</p>
+                    <p id="info-tier" class="font-semibold">-</p>
+                </div>
+                <div>
+                    <p class="text-indigo-200 text-sm">Apps</p>
+                    <p id="info-apps" class="font-semibold text-sm">-</p>
+                </div>
+                <div>
+                    <p class="text-indigo-200 text-sm">Trial Since</p>
+                    <p id="info-since" class="font-semibold">-</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conversion Type Cards -->
+        <h2 class="text-xl font-bold text-gray-900 mb-6">Choose your deployment</h2>
+        <div id="type-cards" class="grid md:grid-cols-3 gap-6 mb-8">
+            <!-- Populated by JS -->
+        </div>
+
+        <div class="text-center">
+            <button id="btn-next-config" onclick="showStep('configure')" disabled
+                class="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-indigo-700 transition-colors">
+                Continue
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Step 2: Configure -->
+<div id="step-configure" class="step">
+    <div class="max-w-2xl mx-auto py-12 px-4">
+        <button onclick="showStep('choose')" class="text-indigo-600 mb-6 inline-flex items-center hover:underline">
+            &#8592; Back
+        </button>
+
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">Configure Production</h2>
+        <p id="config-subtitle" class="text-gray-600 mb-8"></p>
+
+        <div class="bg-white border border-gray-200 rounded-xl p-6 mb-6">
+            <!-- Plan selection (for FC types) -->
+            <div id="plan-section">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Production Plan</label>
+                <select id="input-plan" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <option value="">Select a plan...</option>
+                </select>
+            </div>
+
+            <!-- Subdomain (for FC New Site) -->
+            <div id="subdomain-section" class="mt-4" style="display:none;">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Production Subdomain</label>
+                <div class="flex items-center">
+                    <input id="input-subdomain" type="text" placeholder="your-company"
+                        class="flex-1 border border-gray-300 rounded-l-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <span class="bg-gray-100 border border-l-0 border-gray-300 rounded-r-lg px-4 py-2.5 text-gray-500">.frappe.cloud</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 mb-8">
+            <h3 class="font-semibold text-gray-900 mb-3">Summary</h3>
+            <div class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Conversion Type</span>
+                    <span id="summary-type" class="font-medium">-</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Plan</span>
+                    <span id="summary-plan" class="font-medium">-</span>
+                </div>
+                <div id="summary-subdomain-row" class="flex justify-between" style="display:none;">
+                    <span class="text-gray-600">New Subdomain</span>
+                    <span id="summary-subdomain" class="font-medium">-</span>
+                </div>
+            </div>
+        </div>
+
+        <button id="btn-submit" onclick="submitConversion()"
+            class="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
+            Submit Conversion Request
+        </button>
+    </div>
+</div>
+
+<!-- Step 3: Submitted -->
+<div id="step-submitted" class="step">
+    <div class="min-h-[60vh] flex items-center justify-center">
+        <div class="text-center max-w-md">
+            <div class="text-green-500 text-5xl mb-4">&#10004;</div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Request Submitted</h2>
+            <p class="text-gray-600 mb-2">Your conversion request <strong id="conv-id"></strong> has been submitted.</p>
+            <p class="text-gray-600 mb-6">Our team will review it and get back to you shortly. You'll receive an email once your production environment is ready.</p>
+            <div id="conv-status-box" class="bg-gray-50 border border-gray-200 rounded-xl p-4 text-left text-sm">
+                <p class="font-medium text-gray-700 mb-1">Status: <span id="conv-status" class="text-indigo-600">Pending</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let pageData = {};
+    let selectedType = null;
+    let conversionRequest = null;
+
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    const site = params.get('site');
+
+    // init
+    (async function() {
+        if (!token || !site) {
+            document.getElementById('error-message').textContent = 'Missing token or site parameter.';
+            showStep('error');
+            return;
+        }
+
+        try {
+            const resp = await frappe.call({
+                method: 'frappe_kit.frappe_kit.api.conversion.get_conversion_options',
+                args: { token, site },
+                freeze: false,
+            });
+
+            pageData = resp.message;
+            populateSiteInfo();
+            populateTypeCards();
+            populatePlans();
+            showStep('choose');
+        } catch (e) {
+            document.getElementById('error-message').textContent =
+                e.message || 'This conversion link is no longer valid.';
+            showStep('error');
+        }
+    })();
+
+    function showStep(name) {
+        document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+        document.getElementById('step-' + name).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    function populateSiteInfo() {
+        const s = pageData.site;
+        const c = pageData.company;
+        document.getElementById('info-company').textContent = c.name;
+        document.getElementById('info-tier').textContent = s.package_tier || '-';
+        document.getElementById('info-apps').textContent = (s.apps_installed || '').replace(/,/g, ', ');
+        document.getElementById('info-since').textContent = s.created_at
+            ? new Date(s.created_at).toLocaleDateString()
+            : '-';
+    }
+
+    function populateTypeCards() {
+        const container = document.getElementById('type-cards');
+        const icons = {
+            'arrow-up': '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>',
+            'plus': '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>',
+            'download': '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>',
+        };
+
+        pageData.conversion_types.forEach(t => {
+            const card = document.createElement('div');
+            card.className = 'type-card border-2 border-gray-200 rounded-xl p-6 cursor-pointer hover:border-indigo-400';
+            card.dataset.value = t.value;
+            card.innerHTML = `
+                <div class="text-indigo-600 mb-3">${icons[t.icon] || ''}</div>
+                <h3 class="font-bold text-gray-900 mb-1">${t.label}</h3>
+                <p class="text-sm text-gray-600">${t.description}</p>
+            `;
+            card.addEventListener('click', () => selectType(t.value, card));
+            container.appendChild(card);
+        });
+    }
+
+    function selectType(value, card) {
+        selectedType = value;
+        document.querySelectorAll('.type-card').forEach(c => {
+            c.classList.remove('border-indigo-600', 'bg-indigo-50');
+            c.classList.add('border-gray-200');
+        });
+        card.classList.remove('border-gray-200');
+        card.classList.add('border-indigo-600', 'bg-indigo-50');
+        document.getElementById('btn-next-config').disabled = false;
+    }
+
+    function populatePlans() {
+        const select = document.getElementById('input-plan');
+        (pageData.plans || []).forEach(p => {
+            const opt = document.createElement('option');
+            opt.value = p.plan_name;
+            opt.textContent = `${p.display_name}${p.monthly_price ? ' - $' + p.monthly_price + '/mo' : ''}`;
+            select.appendChild(opt);
+        });
+    }
+
+    // when moving to configure step, update the UI
+    const origShowStep = showStep;
+    showStep = function(name) {
+        if (name === 'configure') {
+            updateConfigStep();
+        }
+        origShowStep(name);
+    };
+
+    function updateConfigStep() {
+        const typeLabel = pageData.conversion_types.find(t => t.value === selectedType)?.label || selectedType;
+        document.getElementById('config-subtitle').textContent = `Setting up: ${typeLabel}`;
+        document.getElementById('summary-type').textContent = typeLabel;
+
+        const isNewSite = selectedType === 'FC New Site';
+        const isSelfHosted = selectedType === 'Self Hosted';
+
+        document.getElementById('subdomain-section').style.display = isNewSite ? 'block' : 'none';
+        document.getElementById('summary-subdomain-row').style.display = isNewSite ? 'flex' : 'none';
+        document.getElementById('plan-section').style.display = isSelfHosted ? 'none' : 'block';
+    }
+
+    // live summary updates
+    document.getElementById('input-plan').addEventListener('change', function() {
+        const plan = pageData.plans.find(p => p.plan_name === this.value);
+        document.getElementById('summary-plan').textContent = plan ? plan.display_name : '-';
+    });
+
+    document.getElementById('input-subdomain').addEventListener('input', function() {
+        document.getElementById('summary-subdomain').textContent = this.value || '-';
+    });
+
+    async function submitConversion() {
+        const btn = document.getElementById('btn-submit');
+        btn.disabled = true;
+        btn.textContent = 'Submitting...';
+
+        const data = {
+            conversion_type: selectedType,
+            production_plan: document.getElementById('input-plan').value,
+            production_subdomain: document.getElementById('input-subdomain').value,
+        };
+
+        // validation
+        if (selectedType !== 'Self Hosted' && !data.production_plan) {
+            frappe.msgprint('Please select a production plan.');
+            btn.disabled = false;
+            btn.textContent = 'Submit Conversion Request';
+            return;
+        }
+
+        if (selectedType === 'FC New Site' && !data.production_subdomain) {
+            frappe.msgprint('Please enter a subdomain for the new site.');
+            btn.disabled = false;
+            btn.textContent = 'Submit Conversion Request';
+            return;
+        }
+
+        try {
+            const resp = await frappe.call({
+                method: 'frappe_kit.frappe_kit.api.conversion.submit_conversion_request',
+                args: { token, site, data: JSON.stringify(data) },
+            });
+
+            conversionRequest = resp.message.conversion_request;
+            document.getElementById('conv-id').textContent = conversionRequest;
+            showStep('submitted');
+        } catch (e) {
+            frappe.msgprint(e.message || 'Something went wrong. Please try again.');
+            btn.disabled = false;
+            btn.textContent = 'Submit Conversion Request';
+        }
+    }
+</script>
+{% endblock %}

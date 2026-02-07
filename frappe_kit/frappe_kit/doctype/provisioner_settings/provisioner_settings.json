@@ -23,7 +23,13 @@
     "expiry_warning_days",
     "limits_section",
     "max_concurrent_demos",
-    "daily_provisioning_limit"
+    "daily_provisioning_limit",
+    "conversion_section",
+    "enable_conversions",
+    "conversion_email_template",
+    "column_break_conversion",
+    "conversion_token_expiry_hours",
+    "production_plans"
   ],
   "fields": [
     {
@@ -131,6 +137,41 @@
       "fieldtype": "Int",
       "label": "Daily Provisioning Limit",
       "default": "20"
+    },
+    {
+      "fieldname": "conversion_section",
+      "fieldtype": "Section Break",
+      "label": "Conversion Settings"
+    },
+    {
+      "fieldname": "enable_conversions",
+      "fieldtype": "Check",
+      "label": "Enable Conversions",
+      "default": "1"
+    },
+    {
+      "fieldname": "conversion_email_template",
+      "fieldtype": "Link",
+      "label": "Conversion Email Template",
+      "options": "Email Template"
+    },
+    {
+      "fieldname": "column_break_conversion",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "conversion_token_expiry_hours",
+      "fieldtype": "Int",
+      "label": "Token Expiry (Hours)",
+      "default": "72",
+      "description": "How long conversion links stay valid"
+    },
+    {
+      "fieldname": "production_plans",
+      "fieldtype": "Table",
+      "label": "Production Plans",
+      "options": "Production Plan Option",
+      "description": "Available plans for production conversion"
     }
   ],
   "links": [],

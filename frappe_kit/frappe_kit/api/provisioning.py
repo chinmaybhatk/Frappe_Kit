@@ -84,6 +84,58 @@ class FrappeCloudAPI:
 
         return response.status_code == 200
 
+    def change_plan(self, site_name, new_plan):
+        """Change a site's subscription plan"""
+        endpoint = f"{self.BASE_URL}/press.api.site.change_plan"
+
+        payload = {"name": site_name, "plan": new_plan}
+
+        response = requests.post(
+            endpoint,
+            headers=self._get_headers(),
+            json=payload,
+            timeout=60,
+        )
+
+        if response.status_code != 200:
+            raise Exception(f"Plan change failed: {response.text}")
+
+        return response.json().get("message")
+
+    def create_backup(self, site_name):
+        """Trigger a backup for a site"""
+        endpoint = f"{self.BASE_URL}/press.api.site.backup"
+
+        payload = {"name": site_name, "with_files": True}
+
+        response = requests.post(
+            endpoint,
+            headers=self._get_headers(),
+            json=payload,
+            timeout=60,
+        )
+
+        if response.status_code != 200:
+            raise Exception(f"Backup creation failed: {response.text}")
+
+        return response.json().get("message")
+
+    def get_backups(self, site_name):
+        """Get list of available backups for a site"""
+        endpoint = f"{self.BASE_URL}/press.api.site.backups"
+
+        response = requests.get(
+            endpoint,
+            headers=self._get_headers(),
+            params={"name": site_name},
+            timeout=30,
+        )
+
+        if response.status_code != 200:
+            raise Exception(f"Failed to get backups: {response.text}")
+
+        return response.json().get("message", [])
+
 
 def generate_password(length=12):
     """Generate a secure random password"""

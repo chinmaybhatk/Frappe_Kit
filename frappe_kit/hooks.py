@@ -12,6 +12,7 @@ app_license = "MIT"
 # Website
 website_route_rules = [
     {"from_route": "/demo", "to_route": "demo"},
+    {"from_route": "/convert", "to_route": "convert"},
 ]
 
 # Guest access for demo request APIs
@@ -20,6 +21,9 @@ guest_methods = [
     "frappe_kit.frappe_kit.api.provisioning.get_industries",
     "frappe_kit.frappe_kit.api.provisioning.submit_demo_request",
     "frappe_kit.frappe_kit.api.provisioning.check_provisioning_status",
+    "frappe_kit.frappe_kit.api.conversion.get_conversion_options",
+    "frappe_kit.frappe_kit.api.conversion.submit_conversion_request",
+    "frappe_kit.frappe_kit.api.conversion.check_conversion_status",
 ]
 
 # Scheduled Tasks
